@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   cardCont:{
     flexWrap: 'wrap',
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     marginTop: '40px',
     
   },
@@ -89,12 +90,28 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '10px'
   },
   mindImg:{
-    width: '50%',
+    width: '40%',
     height: "25%",
   },
   carouselImg:{
-    width: '80%'
+    width: '100%'
   },
+  footer:{
+    marginTop:'50px',
+    padding: theme.spacing(2, 2),
+    borderTop: '1px solid #4571FF',
+    display:'flex',
+    justifyContent:'space-around',
+    alignItems:'center'
+  },
+  footerLink:{
+    color: '#4571FF',
+    fontSize: 20,
+    margin: theme.spacing(1),
+    '&:hover': {
+      textDecoration: 'none'
+   },
+  }
 }));
 
 const card = [
@@ -196,12 +213,15 @@ function App() {
       <Grid item xs={12} style={{textAlign:'center', marginTop:'50px'}}>
         <img src={mindMap} alt="profile" className={classes.mindImg}/>
       </Grid>
-      <Grid item xs={12} className={classes.main}>
+      <Grid item xs={12} className={classes.main} style={{marginTop:'150px'}}>
         <Typography align="center" style={{fontWeight: '600', fontSize:'70px', color:'#4571FF'}}>
           교육 시설
         </Typography>
       </Grid>
-      <Example/>
+      <Grid item xs={12} style={{width:"80%", marginLeft: "10%"}}>
+        <Example/>
+      </Grid>
+      <Footer/>
     </React.Fragment>
   )
 }
@@ -248,6 +268,32 @@ function Item(props)
             <img src={props.item.img} alt={props.item.name} className={classes.carouselImg} />
         </Paper>
     )
+}
+
+function Footer() {
+  const classes = useStyles();
+  return (
+    <Grid item xs={12} className={classes.footer}>
+      <dev>
+        <Link variant="button" href="#" className={classes.footerLink}>
+          연락망
+        </Link>
+        <Link variant="button" href="#" className={classes.footerLink}>
+          견학/면담 신청
+        </Link>
+        <Link variant="button" href="#" className={classes.footerLink}>
+          홈페이지
+        </Link>
+        <Link variant="button" href="#" className={classes.footerLink}>
+          개이정보처리방침
+        </Link>
+        <Link variant="button" href="#" className={classes.footerLink}>
+          오시는 길
+        </Link>
+      </dev>
+      <img src={logo} alt="profile" className={classes.logo}/>
+    </Grid>
+  );
 }
 
 

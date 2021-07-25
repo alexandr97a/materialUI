@@ -1,11 +1,11 @@
 import React from 'react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
@@ -24,6 +24,8 @@ import place1 from '../src/img/place1.png';
 import place2 from '../src/img/place2.png';
 import place3 from '../src/img/place3.png';
 import place4 from '../src/img/place4.png';
+import Mobile from './component/Mobile.jsx';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,18 +56,18 @@ const useStyles = makeStyles((theme) => ({
   },
   Link:{
     color: '#1c313a',
-    fontSize: 20,
+    fontSize: 19,
     margin: theme.spacing(4),
     '&:hover': {
       textDecoration: 'none'
    },
   },
   logo:{
-    width: 150
+    width: 140
   },
   Icon:{
     color:'#4571FF',
-    fontSize: '40px',
+    fontSize: '35px',
     margin: theme.spacing(0, 2),
   },
   main:{
@@ -132,32 +134,39 @@ const card = [
   }
 ];
 
+
 function App() {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar elevation={0} className={classes.AppBar}>
-        <Toolbar  className={classes.toolbar}>
-          <img src={logo} alt="profile" className={classes.logo}/>
-          <navbar className={classes.header}>
-            <Link variant="button" href="#" className={classes.Link} >
-              소개
-            </Link>
-            <Link variant="button" href="#" className={classes.Link}>
-              인재풀
-            </Link>
-            <Link variant="button" href="#" className={classes.Link}>
-              프로젝트
-            </Link>
-          </navbar>
-          <dev className={classes.header}>
-            <NotificationsNoneOutlinedIcon className={classes.Icon} />
-            <PermIdentityOutlinedIcon className={classes.Icon}/>
-          </dev>
-        </Toolbar>
-      </AppBar>
+      {mobile ? <Mobile/>:
+        <>
+          <AppBar elevation={0} className={classes.AppBar}>
+            <Toolbar  className={classes.toolbar}>
+              <img src={logo} alt="profile" className={classes.logo}/>
+              <navbar className={classes.header}>
+                <Link variant="button" href="#" className={classes.Link} >
+                  소개
+                </Link>
+                <Link variant="button" href="#" className={classes.Link}>
+                  인재풀
+                </Link>
+                <Link variant="button" href="#" className={classes.Link}>
+                  프로젝트
+                </Link>
+              </navbar>
+              <dev className={classes.header}>
+                <NotificationsNoneOutlinedIcon className={classes.Icon} />
+                <PermIdentityOutlinedIcon className={classes.Icon}/>
+              </dev>
+            </Toolbar>
+          </AppBar>
+        </>
+      }
       <Grid item xs={12} className={classes.main}>
         <img src={mainImg} alt="profile" className={classes.mainImg}/>
       </Grid>
